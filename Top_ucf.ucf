@@ -1,0 +1,39 @@
+NET "Clk" LOC = "B8";
+
+NET "Reset" LOC = "G12"; // BTN0
+NET "CW2" LOC = "C11"; // BTN1
+NET "CW0" LOC = "M4"; // BTN2
+NET "CW1" LOC = "A7"; // BTN3
+
+NET "SelALU<1>" LOC = "N3"; // Switch7
+NET "SelALU<0>" LOC = "E2"; // Switch6
+
+NET "Address<2>" LOC = "F3"; // Switch5
+NET "Address<1>" LOC = "G3"; // Switch4
+NET "Address<0>" LOC = "B4"; // Switch3
+
+NET "CW3" LOC = "P11"; // Switch0
+
+NET "SalALU<7>" LOC = "G1"; // Led7
+NET "SalALU<6>" LOC = "P4"; // Led6
+NET "SalALU<5>" LOC = "N4"; // Led5
+NET "SalALU<4>" LOC = "N5"; // Led4
+NET "SalALU<3>" LOC = "P6"; // Led3
+NET "SalALU<2>" LOC = "P7"; // Led2
+NET "SalALU<1>" LOC = "M11"; // Led1
+NET "SalALU<0>" LOC = "M5"; // Led0
+
+NET "SalFZ" LOC = "B5"; // External LED
+
+NET "Cathode<6>" LOC = "L14";
+NET "Cathode<5>" LOC = "H12";
+NET "Cathode<4>" LOC = "N14";
+NET "Cathode<3>" LOC = "N11";
+NET "Cathode<2>" LOC = "P12";
+NET "Cathode<1>" LOC = "L13";
+NET "Cathode<0>" LOC = "M12";
+
+NET "Anode<3>" LOC = "F12";
+NET "Anode<2>" LOC = "J12";
+NET "Anode<1>" LOC = "M13";
+NET "Anode<0>" LOC = "K14";
