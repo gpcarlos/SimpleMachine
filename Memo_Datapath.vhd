@@ -37,7 +37,8 @@ entity Memo_Datapath is
 			  SalREGA : out STD_LOGIC_VECTOR(7 downto 0);
 			  SalREGB : out STD_LOGIC_VECTOR(7 downto 0);
 			  SalALU : out STD_LOGIC_VECTOR(7 downto 0);
-			  SalFZ : out STD_LOGIC);
+			  SalFZ : out STD_LOGIC;
+			  DataBus : out STD_LOGIC_VECTOR(7 downto 0));
 end Memo_Datapath;
 
 architecture Structural of Memo_Datapath is
@@ -95,10 +96,11 @@ begin
 		CW3 => CW3,
 		Address => Address,
 		DataIn => signal_SalALU,
-		DataOut => Signal_DataBus
+		DataOut => signal_DataBus
 	);
 	
 	SalALU <= signal_SalALU;
+	DataBus <= signal_DataBus;
 	
 end Structural;
 
