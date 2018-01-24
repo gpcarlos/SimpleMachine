@@ -1,20 +1,12 @@
 NET "Clk" LOC = "B8";
 
 NET "Reset" LOC = "G12"; // BTN0
-NET "CW2" LOC = "F3"; // SWITCH5
-NET "CW7" LOC = "C11"; //BTN1
-NET "CW0" LOC = "M4"; // BTN2
-NET "CW1" LOC = "A7"; // BTN3
 
-NET "SelMPX<1>" LOC = "B4"; // Switch3
-NET "SelMPX<0>" LOC = "K3"; // Switch2
+NET "Push" LOC = "A7"; //BTN3
 
 NET "AddressBus<2>" LOC = "B7"; // External LEDs
 NET "AddressBus<1>" LOC = "C9";
 NET "AddressBus<0>" LOC = "D12";
-
-NET "CW3" LOC = "P11"; // Switch0
-NET "CW4" LOC = "L3"; // Switch1
 
 NET "SalRI<7>" LOC = "G1"; // Led7
 NET "SalRI<6>" LOC = "P4"; // Led6

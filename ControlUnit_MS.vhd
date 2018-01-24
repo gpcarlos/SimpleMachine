@@ -41,12 +41,12 @@ architecture Behavioral of ControlUnit_MS is
 
 	------------------------------------------------------
 	-- DEFINITION of STATES
-	-------------------------------------------------------
+	------------------------------------------------------
 	type States_FSM is (Idle,LoadInst,Deco,LoadA,LoadB,Beq,MovB,AaddB,CMPAB);
 	signal Next_State: States_FSM;
 	------------------------------------------------------
 	-- DEFINITION of the OUTPUTS for each STATE
-	-------------------------------------------------------       9876543210
+	------------------------------------------------------   CW = 9876543210
 	constant Outputs_Idle : std_logic_vector (9 downto 0)     := "0000000000";
 	constant Outputs_LoadInst : std_logic_vector (9 downto 0) := "0010010000"; 
 	constant Outputs_Deco : std_logic_vector (9 downto 0)     := "0000000000"; 
@@ -56,10 +56,9 @@ architecture Behavioral of ControlUnit_MS is
 	constant Outputs_MovB : std_logic_vector (9 downto 0)     := "0001001100"; 
 	constant Outputs_AaddB : std_logic_vector (9 downto 0)    := "1001001100"; 
 	constant Outputs_CMPAB : std_logic_vector (9 downto 0)    := "1101000100"; 
-	
------------------------------------------------------------------
 
 begin
+
 	process (Clk,Reset)
 	begin
 		if (Reset='1') then 
@@ -150,7 +149,8 @@ begin
 				when CMPAB =>
 					if (Push = '1') then
 						Next_State <= LoadInst;
-					end if;		
+					end if;
+			---------------------
 				when others =>
 					Next_State <= Idle;
 			end case;

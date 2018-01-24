@@ -33,12 +33,13 @@ entity Microarquitectura_MS is
     Port ( Clk, Reset : in  STD_LOGIC;
            CW0, CW1, CW2, CW3, CW4, CW7 : in  STD_LOGIC;
 			  SelMPX : in STD_LOGIC_VECTOR(1 downto 0);
+			  SelALU : in STD_LOGIC_VECTOR(1 downto 0);
 			  SalREGA : out STD_LOGIC_VECTOR(7 downto 0);
 			  SalREGB : out STD_LOGIC_VECTOR(7 downto 0);
 			  SalFZ : out STD_LOGIC;
 			  SalRI : out STD_LOGIC_VECTOR(7 downto 0);
-			  AddressBus : out STD_LOGIC_VECTOR(2 downto 0)
-			  );
+			  AddressBus : out STD_LOGIC_VECTOR(2 downto 0);
+			  COP : out STD_LOGIC_VECTOR(1 downto 0));
 end Microarquitectura_MS;
 
 architecture Structural of Microarquitectura_MS is
@@ -60,15 +61,6 @@ architecture Structural of Microarquitectura_MS is
 		DataBus : OUT std_logic_vector(7 downto 0)
 		);
 	END COMPONENT;
-	
-	COMPONENT RisingEdge
-	PORT(
-		Reset : IN std_logic;
-		Push : IN std_logic;
-		Clk : IN std_logic;          
-		Pulse : OUT std_logic
-		);
-	END COMPONENT;
 
 	constant ZERO : STD_LOGIC_VECTOR (7 downto 0) := (others => '0');
 	signal signal_SalRI : STD_LOGIC_VECTOR (7 downto 0);
@@ -76,8 +68,7 @@ architecture Structural of Microarquitectura_MS is
 	signal signal_MPX_RAM : STD_LOGIC_VECTOR (2 downto 0);
 	signal signal_PC_MPX : STD_LOGIC_VECTOR (1 downto 0);
 	signal signal_counter : STD_LOGIC_VECTOR (1 downto 0);
-	signal signal_CO : STD_LOGIC_VECTOR (1 downto 0);
-	signal signal_CW7 : STD_LOGIC;
+	signal signal_COP : STD_LOGIC_VECTOR (1 downto 0);
 
 begin
 
@@ -89,7 +80,7 @@ begin
 		CW2 => CW2,
 		CW3 => CW3,
 		Address => signal_MPX_RAM,
-		SelALU => signal_CO,
+		SelALU => SelALU,
 		SalREGA => SalREGA,
 		SalREGB => SalREGB,
 		SalALU => open,
@@ -108,19 +99,12 @@ begin
 		end if;
 	end process;	
 	
-	Inst_RisingEdge: RisingEdge PORT MAP(
-		Reset => Reset,
-		Push => CW7,
-		Clk => Clk,
-		Pulse => signal_CW7
-	);
-	
 	PC: process (Clk, Reset)
 	begin
 		if (Reset = '1') then
 			signal_PC_MPX <= "00";
 		elsif rising_edge(Clk) then
-			if (signal_CW7='1') then
+			if (CW7='1') then
 				signal_PC_MPX <= signal_counter;
 			end if;		
 		end if;
@@ -129,7 +113,7 @@ begin
 	signal_counter <= std_logic_vector(unsigned(signal_MPX_RAM(1 downto 0))+1);
 	
 	SalRI <= signal_SalRI;
-	signal_CO <= signal_SalRI(7 downto 6);
+	signal_COP <= signal_SalRI(7 downto 6);
 	with SelMPX select signal_MPX_RAM <=
 		'1'&signal_PC_MPX when "00",
 		signal_SalRI(5 downto 3) when "10",
@@ -137,7 +121,7 @@ begin
 		"000" when others;
 		
 	AddressBus <= signal_MPX_RAM;
-
+	COP <= signal_COP;
 
 end Structural;
 

@@ -37,13 +37,15 @@ entity RisingEdge is
 end RisingEdge;
 
 architecture Behavioral of RisingEdge is
+
 	signal RegisteredPush: std_logic; -- To avoid async. input
 	signal PreviousPush: std_logic; -- To store "Push"
+	
 begin
-----------------------------------------------------------
---SEQUENTIAL CIRCUIT
-----------------------------------------------------
---Syncronizes the input "Push"
+	----------------------------------------------------------
+	--SEQUENTIAL CIRCUIT
+	----------------------------------------------------
+	--Syncronizes the input "Push"
 	SincPush:process(CLK,Reset)
 	begin
 		if Reset='1' then
