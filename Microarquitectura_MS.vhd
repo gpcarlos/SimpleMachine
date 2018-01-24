@@ -74,8 +74,8 @@ architecture Structural of Microarquitectura_MS is
 	signal signal_SalRI : STD_LOGIC_VECTOR (7 downto 0);
 	signal signal_DataBus : STD_LOGIC_VECTOR (7 downto 0);
 	signal signal_MPX_RAM : STD_LOGIC_VECTOR (2 downto 0);
-	signal signal_PC_MPX : STD_LOGIC_VECTOR (2 downto 0);
-	signal signal_counter : STD_LOGIC_VECTOR (2 downto 0);
+	signal signal_PC_MPX : STD_LOGIC_VECTOR (1 downto 0);
+	signal signal_counter : STD_LOGIC_VECTOR (1 downto 0);
 	signal signal_CO : STD_LOGIC_VECTOR (1 downto 0);
 	signal signal_CW7 : STD_LOGIC;
 
@@ -118,7 +118,7 @@ begin
 	PC: process (Clk, Reset)
 	begin
 		if (Reset = '1') then
-			signal_PC_MPX <= "000";
+			signal_PC_MPX <= "00";
 		elsif rising_edge(Clk) then
 			if (signal_CW7='1') then
 				signal_PC_MPX <= signal_counter;
@@ -126,12 +126,12 @@ begin
 		end if;
 	end process;	
 	
-	signal_counter <= std_logic_vector(unsigned(signal_MPX_RAM)+1);
+	signal_counter <= std_logic_vector(unsigned(signal_MPX_RAM(1 downto 0))+1);
 	
 	SalRI <= signal_SalRI;
 	signal_CO <= signal_SalRI(7 downto 6);
 	with SelMPX select signal_MPX_RAM <=
-		'1'&signal_PC_MPX(1 downto 0) when "00",
+		'1'&signal_PC_MPX when "00",
 		signal_SalRI(5 downto 3) when "10",
 		signal_SalRI(2 downto 0) when "11",
 		"000" when others;

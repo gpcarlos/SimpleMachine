@@ -42,12 +42,12 @@ architecture Behavioral of Memo_8x8 is
 	type ram_type is array (7 downto 0) of STD_LOGIC_VECTOR (7 downto 0);
 	
 	signal RAM: ram_type :=
-		( 0 => "00000100",
-		  1 => "00001000",
-		  3 => "00000011",
+		( 1 => "00000100",
+		  2 => "00001000",
 		  4 => "00000001",
 		  5 => "10000001",
-		  6 => "11000011",
+		  6 => "11000010",
+		  7 => "01101000",
 		  others => "00000000");
 		
 begin
