@@ -114,7 +114,7 @@ begin
 	
 	SalRI <= signal_SalRI;
 	signal_COP <= signal_SalRI(7 downto 6);
-	with SelMPX select signal_MPX_RAM <=
+	with SelMPX select signal_MPX_RAM <=    -- Multiplexor
 		'1'&signal_PC_MPX when "00",
 		signal_SalRI(5 downto 3) when "10",
 		signal_SalRI(2 downto 0) when "11",
